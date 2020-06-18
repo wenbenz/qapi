@@ -42,19 +42,19 @@ type Activity struct {
 	Currency string `json:"currency"`
 
 	// Activity quantity (number of shares, etc.).
-	Quantity float32 `json:"quantity"`
+	Quantity float64 `json:"quantity"`
 
 	// Price paid.
-	Price float32 `json:"price"`
+	Price float64 `json:"price"`
 
 	// Gross amount.
-	GrossAmount float32 `json:"grossAmount"`
+	GrossAmount float64 `json:"grossAmount"`
 
 	// Total of any commission paid.
-	Commission float32 `json:"commission"`
+	Commission float64 `json:"commission"`
 
 	// Net amount.
-	NetAmount float32 `json:"netAmount"`
+	NetAmount float64 `json:"netAmount"`
 
 	// Text description of the action (ie: "Transfers", "Interest").
 	Type string `json:"type"`

@@ -15,13 +15,13 @@ type Symbol struct {
 	SymbolID int `json:"symbolId"`
 
 	// Closing trade price from the previous trading day.
-	PrevDayClosePrice float32 `json:"prevDayClosePrice"`
+	PrevDayClosePrice float64 `json:"prevDayClosePrice"`
 
 	// 52-week high price.
-	HighPrice52 float32 `json:"highPrice52"`
+	HighPrice52 float64 `json:"highPrice52"`
 
 	// 52-week low price.
-	LowPrice52 float32 `json:"lowPrice52"`
+	LowPrice52 float64 `json:"lowPrice52"`
 
 	// Average trading volume over trailing 3 months.
 	AverageVol3Months int `json:"averageVol3Months"`
@@ -33,22 +33,22 @@ type Symbol struct {
 	OutstandingShares int `json:"outstandingShares"`
 
 	// Trailing 12-month earnings per share.
-	EPS float32 `json:"eps"`
+	EPS float64 `json:"eps"`
 
 	// Trailing 12-month price to earnings ratio.
-	PE float32 `json:"pe"`
+	PE float64 `json:"pe"`
 
 	// Dividend amount per share.
-	Dividend float32 `json:"dividend"`
+	Dividend float64 `json:"dividend"`
 
 	// Dividend yield (dividend / prevDayClosePrice).
-	Yield float32 `json:"yield"`
+	Yield float64 `json:"yield"`
 
 	// Dividend ex-date.
 	ExDate *time.Time `json:"exDate"`
 
 	// Market capitalization (outstandingShares * prevDayClosePrice).
-	MarketCap float32 `json:"marketCap"`
+	MarketCap float64 `json:"marketCap"`
 
 	// Option type (e.g., "Call").
 	OptionType string `json:"optionType"`
@@ -81,7 +81,7 @@ type Symbol struct {
 	DividendDate *time.Time `json:"dividendDate"`
 
 	// Option strike price.
-	OptionStrikePrice float32 `json:"optionStrikePrice"`
+	OptionStrikePrice float64 `json:"optionStrikePrice"`
 
 	// Indicates whether the symbol is actively listed.
 	IsQuotable bool `json:"isQuotable"`
@@ -104,12 +104,12 @@ type UnderlyingMultiplierPair struct {
 
 type OptionContractDeliverables struct {
 	Underlyings []UnderlyingMultiplierPair `json:"underlyings"`
-	CashInLieu  float32                    `json:"cashInLieu"`
+	CashInLieu  float64                    `json:"cashInLieu"`
 }
 
 type MinTickData struct {
-	Pivot   float32 `json:"pivot"`
-	MinTick float32 `json:"minTick"`
+	Pivot   float64 `json:"pivot"`
+	MinTick float64 `json:"minTick"`
 }
 
 // Symbol information retreived from search results
@@ -127,7 +127,7 @@ type SymbolSearchResult struct {
 
 type ChainPerStrikePrice struct {
 	// Option strike price.
-	StrikePrice float32 `json:"strikePrice"`
+	StrikePrice float64 `json:"strikePrice"`
 
 	// Internal identifier of the call option symbol.
 	CallSymbolID int `json:"callSymbolId"`
@@ -220,22 +220,22 @@ type Quote struct {
 	Tier string `json:"tier"`
 
 	// Bid price.
-	BidPrice float32 `json:"bidPrice"`
+	BidPrice float64 `json:"bidPrice"`
 
 	// Bid quantity.
 	BidSize int `json:"bidSize"`
 
 	// Ask price.
-	AskPrice float32 `json:"askPrice"`
+	AskPrice float64 `json:"askPrice"`
 
 	// Ask quantity.
 	AskSize int `json:"askSize"`
 
 	// Price of the last trade during regular trade hours.
-	LastTradeTrHrs float32 `json:"lastTradeTrHrs"`
+	LastTradeTrHrs float64 `json:"lastTradeTrHrs"`
 
 	// Price of the last trade.
-	LastTradePrice float32 `json:"lastTradePrice"`
+	LastTradePrice float64 `json:"lastTradePrice"`
 
 	// Quantity of the last trade.
 	LastTradeSize int `json:"lastTradeSize"`
@@ -250,13 +250,13 @@ type Quote struct {
 	Volume int `json:"volume"`
 
 	// Opening trade price.
-	OpenPrice float32 `json:"openPrice"`
+	OpenPrice float64 `json:"openPrice"`
 
 	// Daily high price.
-	HighPrice float32 `json:"highPrice"`
+	HighPrice float64 `json:"highPrice"`
 
 	// Daily low price.
-	LowPrice float32 `json:"lowPrice"`
+	LowPrice float64 `json:"lowPrice"`
 
 	// Whether a quote is delayed (true) or real-time.
 	Delay int `json:"delay"`
@@ -275,16 +275,16 @@ type Candlestick struct {
 	End time.Time `json:"end"`
 
 	// Opening price.
-	Open float32 `json:"open"`
+	Open float64 `json:"open"`
 
 	// High price.
-	High float32 `json:"high"`
+	High float64 `json:"high"`
 
 	// Low price.
-	Low float32 `json:"low"`
+	Low float64 `json:"low"`
 
 	// Closing price.
-	Close float32 `json:"close"`
+	Close float64 `json:"close"`
 
 	// Trading volume.
 	Volume int `json:"volume"`

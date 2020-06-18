@@ -13,28 +13,28 @@ type Position struct {
 	SymbolID int `json:"symbolId"`
 
 	// Position quantity remaining open.
-	OpenQuantity float32 `json:"openQuantity"`
+	OpenQuantity float64 `json:"openQuantity"`
 
 	// Portion of the position that was closed today.
-	ClosedQuantity float32 `json:"closedQuantity"`
+	ClosedQuantity float64 `json:"closedQuantity"`
 
 	// Market value of the position (quantity x price).
-	CurrentMarketValue float32 `json:"currentMarketValue"`
+	CurrentMarketValue float64 `json:"currentMarketValue"`
 
 	// Current price of the position symbol.
-	CurrentPrice float32 `json:"currentPrice"`
+	CurrentPrice float64 `json:"currentPrice"`
 
 	// Average price paid for all executions constituting the position.
-	AverageEntryPrice float32 `json:"averageEntryPrice"`
+	AverageEntryPrice float64 `json:"averageEntryPrice"`
 
 	// Realized profit/loss on this position.
-	ClosedPnL float32 `json:"closedPnL"`
+	ClosedPnL float64 `json:"closedPnL"`
 
 	// Unrealized profit/loss on this position.
-	OpenPnL float32 `json:"openPnL"`
+	OpenPnL float64 `json:"openPnL"`
 
 	// Total cost of the position.
-	TotalCost float32 `json:"totalCost"`
+	TotalCost float64 `json:"totalCost"`
 
 	// Designates whether real-time quote was used to compute PnL.
 	IsRealTime bool `json:"isRealTime"`

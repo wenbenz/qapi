@@ -243,7 +243,7 @@ func (c *Client) GetActivities(number string, start time.Time, end time.Time) ([
 func (c *Client) GetBalances(id int) (AccountBalances, error) {
 	bal := AccountBalances{}
 
-	err := c.get(fmt.Sprintf("v1/accounts/%d/positions", id), &bal, url.Values{})
+	err := c.get(fmt.Sprintf("v1/accounts/%d/balances", id), &bal, url.Values{})
 	if err != nil {
 		return AccountBalances{}, err
 	}

@@ -35,10 +35,10 @@ type Order struct {
 	OrderType string `json:"orderType"`
 
 	// Limit price.
-	LimitPrice float32 `json:"limitPrice"`
+	LimitPrice float64 `json:"limitPrice"`
 
 	// Stop price.
-	StopPrice float32 `json:"stopPrice"`
+	StopPrice float64 `json:"stopPrice"`
 
 	// Specifies all-or-none special instruction.
 	IsAllOrNone bool `json:"isAllOrNone"`
@@ -53,10 +53,10 @@ type Order struct {
 	MinQuantity int `json:"minQuantity"`
 
 	// Average price of all executions received for this order.
-	AvgExecPrice float32 `json:"avgExecPrice"`
+	AvgExecPrice float64 `json:"avgExecPrice"`
 
 	// Price of the last execution received for the order in question.
-	LastExecPrice float32 `json:"lastExecPrice"`
+	LastExecPrice float64 `json:"lastExecPrice"`
 
 	// See enumerations for all allowed values
 	Source string `json:"source"`
@@ -98,7 +98,7 @@ type Order struct {
 	VenueHoldingOrder string `json:"venueHoldingOrder"`
 
 	// Total commission amount charged for this order.
-	CommissionCharged float32 `json:"commissionCharged"`
+	CommissionCharged float64 `json:"commissionCharged"`
 
 	// Identifier assigned to this order by exchange where it was routed.
 	ExchangeOrderID string `json:"exchangeOrderId"`
@@ -116,16 +116,13 @@ type Order struct {
 	UserID int `json:"userId"`
 
 	// Commission for placing the order via the Trade Desk over the phone.
-	PlacementCommission float32 `json:"placementCommission"`
-
-	// List of OrderLeg elements.
-	Legs []OrderLeg `json:"legs"`
+	PlacementCommission float64 `json:"placementCommission"`
 
 	// Multi-leg strategy to which the order belongs.
 	StrategyType string `json:"strategyType"`
 
 	// Stop price at which order was triggered.
-	TriggerStopPrice float32 `json:"triggerStopPrice"`
+	TriggerStopPrice float64 `json:"triggerStopPrice"`
 
 	// Internal identifier of the order group.
 	OrderGroupID int `json:"orderGroupId"`
@@ -152,10 +149,10 @@ type OrderRequest struct {
 	IcebergQuantity int `json:"icebergQuantity,omitempty"`
 
 	// Limit price.
-	LimitPrice float32 `json:"limitPrice,omitempty"`
+	LimitPrice float64 `json:"limitPrice,omitempty"`
 
 	// Stop price.
-	StopPrice float32 `json:"stopPrice,omitempty"`
+	StopPrice float64 `json:"stopPrice,omitempty"`
 
 	TimeInForce string `json:"timeInForce"`
 
@@ -183,19 +180,19 @@ type OrderRequest struct {
 // Ref: http://www.questrade.com/api/documentation/rest-operations/order-calls/accounts-id-orders-impact
 type OrderImpact struct {
 	// Estimate of commissions to be charged on the order.
-	EstimatedCommissions float32 `json:"estimatedCommissions"`
+	EstimatedCommissions float64 `json:"estimatedCommissions"`
 
 	// Estimate of change in buying power from the order.
-	BuyingPowerEffect float32 `json:"buyingPowerEffect"`
+	BuyingPowerEffect float64 `json:"buyingPowerEffect"`
 
 	// Estimate of buying power in which order will result.
-	BuyingPowerResult float32 `json:"buyingPowerResult"`
+	BuyingPowerResult float64 `json:"buyingPowerResult"`
 
 	// Estimate of change in maintenance excess from the order.
-	MaintExcessEffect float32 `json:"maintExcessEffect"`
+	MaintExcessEffect float64 `json:"maintExcessEffect"`
 
 	// Estimate of maintenance excess in which the order will result.
-	MaintExcessResult float32 `json:"maintExcessResult"`
+	MaintExcessResult float64 `json:"maintExcessResult"`
 
 	// Client view of the order side (e.g., "Buy-To-Open").
 	Side string `json:"side"`
@@ -204,5 +201,5 @@ type OrderImpact struct {
 	TradeValueCalculation string `json:"tradeValueCalculation"`
 
 	// Estimated average fill price.
-	Price float32 `json:"price"`
+	Price float64 `json:"price"`
 }

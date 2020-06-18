@@ -19,7 +19,7 @@ type Execution struct {
 	Side string `json:"side"`
 
 	// Execution price.
-	Price float32 `json:"price"`
+	Price float64 `json:"price"`
 
 	// Internal identifier of the execution.
 	ID int `json:"id"`
@@ -43,19 +43,19 @@ type Execution struct {
 	Venue string `json:"venue"`
 
 	// Execution cost (price x quantity).
-	TotalCost float32 `json:"totalCost"`
+	TotalCost float64 `json:"totalCost"`
 
 	// Questrade commission for orders placed with Trade Desk.
-	OrderPlacementCommission float32 `json:"orderPlacementCommission"`
+	OrderPlacementCommission float64 `json:"orderPlacementCommission"`
 
 	// Questrade commission.
-	Commission float32 `json:"commission"`
+	Commission float64 `json:"commission"`
 
 	// Liquidity fee charged by execution venue.
-	ExecutionFee float32 `json:"executionFee"`
+	ExecutionFee float64 `json:"executionFee"`
 
 	// SEC fee charged on all sales of US securities.
-	SecFee float32 `json:"secFee"`
+	SecFee float64 `json:"secFee"`
 
 	// Additional execution fee charged by TSX (if applicable).
 	CanadianExecutionFee int `json:"canadianExecutionFee"`
