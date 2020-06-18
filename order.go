@@ -4,10 +4,7 @@ import (
 	"time"
 )
 
-// TODO - Populate this struct
-type OrderLeg struct {
-}
-
+//
 // Ref: http://www.questrade.com/api/documentSymation/rest-operations/account-calls/accounts-id-orders
 type Order struct {
 	// Internal order identifier.

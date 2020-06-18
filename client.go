@@ -28,6 +28,34 @@ type Client struct {
 	transport          *http.Transport
 }
 
+// NewClient is the factory function for clients - takes a refresh token and logs into
+// either the practice or live server.
+func NewClient(refreshToken string, practice bool) (*Client, error) {
+	transport := &http.Transport{
+		ResponseHeaderTimeout: 5 * time.Second,
+	}
+
+	client := &http.Client{
+		Transport: transport,
+	}
+
+	// Create a new client
+	c := &Client{
+		Credentials: LoginCredentials{
+			RefreshToken: refreshToken,
+		},
+		httpClient: client,
+		transport:  transport,
+	}
+
+	err := c.Login(practice)
+	if err != nil {
+		return nil, err
+	}
+
+	return c, nil
+}
+
 // Send an HTTP GET request, and return the processed response
 func (c *Client) get(endpoint string, out interface{}, query url.Values) error {
 	req, err := http.NewRequest("GET", c.Credentials.ApiServer+endpoint+query.Encode(), nil)
@@ -183,16 +211,56 @@ func (c *Client) GetAccounts() (int, []Account, error) {
 	return list.UserID, list.Accounts, nil
 }
 
+// GetActivities returns the activities related to a given account between the start and end times.
+// If the times are zero-value, then the API will default the start and end times to the beginning
+// and end of the current day.
+// Copied from https://github.com/paudley/qapi
+func (c *Client) GetActivities(number string, start time.Time, end time.Time) ([]Activity, error) {
+	// Format the times if they are not zero-values
+	params := url.Values{}
+	if !start.Equal(time.Time{}) {
+		params.Add("startTime", start.Format(time.RFC3339))
+	}
+
+	if !end.Equal(time.Time{}) {
+		params.Add("endTime", end.Format(time.RFC3339))
+	}
+
+	act := struct {
+		Activities []Activity `json:"activities"`
+	}{}
+
+	err := c.get("v1/accounts/"+number+"/activities?", &act, params)
+
+	if err != nil {
+		return []Activity{}, err
+	}
+
+	return act.Activities, nil
+}
+
 // GetBalances returns the balances for the account with the specified account number
-func (c *Client) GetBalances(number string) (AccountBalances, error) {
+func (c *Client) GetBalances(id int) (AccountBalances, error) {
 	bal := AccountBalances{}
 
-	err := c.get("v1/accounts/"+number+"/balances", &bal, url.Values{})
+	err := c.get(fmt.Sprintf("v1/accounts/%d/positions", id), &bal, url.Values{})
 	if err != nil {
 		return AccountBalances{}, err
 	}
 
 	return bal, nil
+}
+
+// GetPositions returns the positions for the account with the specified account number
+func (c *Client) GetPositions(id int) ([]Position, error) {
+	var pos Positions
+
+	err := c.get(fmt.Sprintf("v1/accounts/%d/positions", id), &pos, url.Values{})
+	if err != nil {
+		return []Position{}, err
+	}
+
+	return pos.Positions, nil
 }
 
 // GetExecutions returns the number of executions for a given account between the start and end times
@@ -481,32 +549,4 @@ func (c *Client) GetCandles(id int, start time.Time, end time.Time, interval str
 		return []Candlestick{}, err
 	}
 	return r.Candles, nil
-}
-
-// NewClient is the factory function for clients - takes a refresh token and logs into
-// either the practice or live server.
-func NewClient(refreshToken string, practice bool) (*Client, error) {
-	transport := &http.Transport{
-		ResponseHeaderTimeout: 5 * time.Second,
-	}
-
-	client := &http.Client{
-		Transport: transport,
-	}
-
-	// Create a new client
-	c := &Client{
-		Credentials: LoginCredentials{
-			RefreshToken: refreshToken,
-		},
-		httpClient: client,
-		transport:  transport,
-	}
-
-	err := c.Login(practice)
-	if err != nil {
-		return nil, err
-	}
-
-	return c, nil
 }
