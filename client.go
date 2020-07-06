@@ -230,7 +230,7 @@ func (c *Client) GetActivities(number string, start time.Time, end time.Time) ([
 		Activities []Activity `json:"activities"`
 	}{}
 
-	err := c.get("v1/accounts/"+number+"/activities?", &act, params)
+	err := c.get(fmt.Sprintf("v1/accounts/%s/activities?",number), &act, params)
 
 	if err != nil {
 		return []Activity{}, err
@@ -240,10 +240,10 @@ func (c *Client) GetActivities(number string, start time.Time, end time.Time) ([
 }
 
 // GetBalances returns the balances for the account with the specified account number
-func (c *Client) GetBalances(id int) (AccountBalances, error) {
+func (c *Client) GetBalances(id string) (AccountBalances, error) {
 	bal := AccountBalances{}
 
-	err := c.get(fmt.Sprintf("v1/accounts/%d/balances", id), &bal, url.Values{})
+	err := c.get(fmt.Sprintf("v1/accounts/%s/balances", id), &bal, url.Values{})
 	if err != nil {
 		return AccountBalances{}, err
 	}
@@ -252,10 +252,10 @@ func (c *Client) GetBalances(id int) (AccountBalances, error) {
 }
 
 // GetPositions returns the positions for the account with the specified account number
-func (c *Client) GetPositions(id int) ([]Position, error) {
+func (c *Client) GetPositions(id string) ([]Position, error) {
 	var pos Positions
 
-	err := c.get(fmt.Sprintf("v1/accounts/%d/positions", id), &pos, url.Values{})
+	err := c.get(fmt.Sprintf("v1/accounts/%s/positions", id), &pos, url.Values{})
 	if err != nil {
 		return []Position{}, err
 	}
